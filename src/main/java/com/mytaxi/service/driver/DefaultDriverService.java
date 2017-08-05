@@ -5,6 +5,7 @@ import com.mytaxi.domainobject.DriverDO;
 import com.mytaxi.domainvalue.GeoCoordinate;
 import com.mytaxi.domainvalue.OnlineStatus;
 import com.mytaxi.exception.ConstraintsViolationException;
+import com.mytaxi.exception.DriverOffileException;
 import com.mytaxi.exception.EntityNotFoundException;
 import java.util.List;
 import org.slf4j.LoggerFactory;
@@ -111,6 +112,12 @@ public class DefaultDriverService implements DriverService
     {
         return driverRepository.findByOnlineStatus(onlineStatus);
     }
+    
+    @Override
+    public Boolean findDriverOnline(Long driverId) throws DriverOffileException, EntityNotFoundException
+    {
+    	return findDriverIsOnline(driverId);		
+    }
 
 
     private DriverDO findDriverChecked(Long driverId) throws EntityNotFoundException
@@ -121,6 +128,15 @@ public class DefaultDriverService implements DriverService
             throw new EntityNotFoundException("Could not find entity with id: " + driverId);
         }
         return driverDO;
+    }
+    
+    private Boolean findDriverIsOnline(Long driverId) throws DriverOffileException, EntityNotFoundException
+    {
+    	OnlineStatus onlineStatus = findDriverChecked(driverId).getOnlineStatus();
+    	if(onlineStatus == OnlineStatus.OFFLINE){
+    		throw new DriverOffileException("The driver is offline with id: " + driverId);
+    	}
+    	return true;
     }
 
 }
