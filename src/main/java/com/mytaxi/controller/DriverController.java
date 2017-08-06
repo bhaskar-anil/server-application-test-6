@@ -92,8 +92,20 @@ public class DriverController
         return DriverMapper.makeDriverDTOList(driverService.find(onlineStatus));
     }
     
-    @PutMapping("/{driverId}/drive")
+    @PutMapping("/{driverId}/select")
     public void selectCar(
+    		@Valid @PathVariable long driverId, @RequestParam long carId, HttpServletResponse response)
+    		throws EntityNotFoundException, DriverOffileException, IOException, CarAlreadyInUseException
+    {
+    	if(driverService.findDriverOnline(driverId))
+    	{
+    		carService.select(carId);
+    		//return "forward:/v1/cars/"+carId+"/select";
+    	}
+    }
+    
+    @PutMapping("/{driverId}/deselect")
+    public void deSelectCar(
     		@Valid @PathVariable long driverId, @RequestParam long carId, HttpServletResponse response)
     		throws EntityNotFoundException, DriverOffileException, IOException, CarAlreadyInUseException
     {

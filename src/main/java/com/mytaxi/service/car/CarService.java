@@ -18,5 +18,7 @@ public interface CarService {
 	List<CarDO> find(Boolean isAvailabe);
 	
 	void select(Long carId) throws CarAlreadyInUseException, EntityNotFoundException;
+	
+	void deSelect(Long carId) throws EntityNotFoundException;
 
 }

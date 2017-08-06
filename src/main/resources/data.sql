@@ -40,3 +40,13 @@ values
  (8,
  'aced0005737200226f72672e737072696e676672616d65776f726b2e646174612e67656f2e506f696e7431b9e90ef11a4006020002440001784400017978704023000000000000404bfa1cac083127', now(), now(), false, 'ONLINE',
 'driver08pw', 'driver08');
+
+-- create 3 availabe cars
+insert into car (id, license_plate, date_created, seat_count, manufacturer, is_convertible, is_available) values (100, 'HVLD135', now(), 4, 'Volkswagen', true, true);
+insert into car (id, license_plate, date_created, seat_count, manufacturer, is_convertible, is_available) values (101, 'HVLD136', now(), 4, 'Volkswagen', true, true);
+insert into car (id, license_plate, date_created, seat_count, manufacturer, is_convertible, is_available) values (102, 'HVLD137', now(), 4, 'Volkswagen', true, true);
+
+-- create 3 unavailable cars
+insert into car (id, license_plate, date_created, seat_count, manufacturer, is_convertible, is_available) values (103, 'HVLD138', now(), 4, 'Volkswagen', true, true);
+insert into car (id, license_plate, date_created, seat_count, manufacturer, is_convertible, is_available) values (104, 'HVLD139', now(), 4, 'Volkswagen', true, true);
+insert into car (id, license_plate, date_created, seat_count, manufacturer, is_convertible, is_available) values (105, 'HVLD140', now(), 4, 'Volkswagen', true, true);
