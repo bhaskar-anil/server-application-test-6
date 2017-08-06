@@ -1,13 +1,22 @@
 package com.mytaxi.controller;
 
+import com.mytaxi.controller.mapper.CarMapper;
 import com.mytaxi.controller.mapper.DriverMapper;
 import com.mytaxi.datatransferobject.DriverDTO;
+import com.mytaxi.domainobject.CarDO;
 import com.mytaxi.domainobject.DriverDO;
 import com.mytaxi.domainvalue.OnlineStatus;
+import com.mytaxi.exception.CarAlreadyInUseException;
 import com.mytaxi.exception.ConstraintsViolationException;
+import com.mytaxi.exception.DriverOffileException;
 import com.mytaxi.exception.EntityNotFoundException;
+import com.mytaxi.service.car.CarService;
 import com.mytaxi.service.driver.DriverService;
+
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,12 +41,15 @@ public class DriverController
 {
 
     private final DriverService driverService;
+    
+    private final CarService carService;
 
 
     @Autowired
-    public DriverController(final DriverService driverService)
+    public DriverController(final DriverService driverService, final CarService carService)
     {
         this.driverService = driverService;
+        this.carService = carService;
     }
 
 
@@ -78,5 +90,17 @@ public class DriverController
         throws ConstraintsViolationException, EntityNotFoundException
     {
         return DriverMapper.makeDriverDTOList(driverService.find(onlineStatus));
+    }
+    
+    @PutMapping("/{driverId}/drive")
+    public void selectCar(
+    		@Valid @PathVariable long driverId, @RequestParam long carId, HttpServletResponse response)
+    		throws EntityNotFoundException, DriverOffileException, IOException, CarAlreadyInUseException
+    {
+    	if(driverService.findDriverOnline(driverId))
+    	{
+    		carService.select(carId);
+    		//return "forward:/v1/cars/"+carId+"/select";
+    	}
     }
 }
