@@ -28,18 +28,21 @@ public class DefaultCarService implements CarService{
 		this.carRepository = carRepository;
 	}
 
-	/**
-     * Selects a car by id.
-     *
-     * @param driverId
-     * @return found driver
-     * @throws EntityNotFoundException if no driver with the given id was found.
+    /**
+     * @param carId
+     * @return CarDO
+     * @throws EntityNotFoundException
      */
-    @Override
+	@Override
 	public CarDO find(Long carId) throws EntityNotFoundException {
     	return findCarChecked(carId);
 	}
 
+	/**
+	 * @param CarDO
+     * @return CarDO
+     * @throws ConstraintsViolationException
+	 */
 	@Override
 	public CarDO create(CarDO carDO) throws ConstraintsViolationException {
 		CarDO car;
@@ -54,6 +57,10 @@ public class DefaultCarService implements CarService{
 		return car;
 	}
 
+	/**
+	 * @param CarDO
+     * @throws EntityNotFoundException
+	 */
 	@Override
 	@Transactional
 	public void delete(Long carId) throws EntityNotFoundException {
@@ -61,6 +68,10 @@ public class DefaultCarService implements CarService{
 		car.setDeleted(true);
 	}
 	
+	/**
+	 * @param carId
+     * @throws CarAlreadyInUseException, EntityNotFoundException
+	 */
 	@Override
 	@Transactional
 	public void select(Long carId) throws CarAlreadyInUseException, EntityNotFoundException
@@ -72,6 +83,10 @@ public class DefaultCarService implements CarService{
 		carDO.setIsAvailable(false);
 	}
 	
+	/**
+	 * @param carId
+     * @throws EntityNotFoundException
+	 */
 	@Override
 	@Transactional
 	public void deSelect(Long carId) throws EntityNotFoundException
@@ -80,6 +95,10 @@ public class DefaultCarService implements CarService{
 		carDO.setIsAvailable(true);
 	}
 
+	/**
+	 * @param Boolean
+	 * @return List<CarDO>
+	 */
 	@Override
 	public List<CarDO> find(Boolean isAvailable) {
 		return carRepository.findByIsAvailable(isAvailable);
