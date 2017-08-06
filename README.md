@@ -34,11 +34,29 @@ You should commit into your local git repository and include the commit history 
  * Extend the DriverController to enable drivers to deselect a car.
  * Extend the DriverDo to map the selected car to the driver.
  
+### Solution
+ * Added Domain Object, Data Transfer Object and Service layer for business logics and controller for `Car` entity.
+ * Extended the DriverController to enable drivers to select a car they are driving with. url: `/v1/drivers/{driverId}/drive?carId={carId}`
+ * Extended the DriverController to enable drivers to deselect a car. url: `/v1/drivers/{driverId}/undrive?carId={carId}`
+ * Added OneToOne mapping with `CarDo` to `DriverDo` to map the selected car to the driver.
+ 
 ## Task 2
 First come first serve: A car can be selected by exactly one ONLINE Driver. If a second driver tries to select a already used car you should throw a CarAlreadyInUseException.
+
+### Solution
+ * Added DriverOfflineException.
+ * `/v1/drivers/{driverId}/drive?carId={carId}` 
+   * If driver is OFFLINE then DriverOfflineException exception is thrown.
+   * If car is already selected by other driver then CarAlreadyInUseException exception is thrown.
 
 ## Task 3
 Make use of the filter pattern to implement an endpoint in the DriverController to get a list of drivers with specific characteristics. Reuse the characteristics you implemented in task 1.
 
+### Solution
+ * Please see the driver/car controller, added required methods for get drivers/cars using filter pattern.
+
 ## Task 4
 Security: secure the API. It's up to you how you are going to implement the security.
+
+### Solution
+ * I shall update it soon if I will get time to implement it.
