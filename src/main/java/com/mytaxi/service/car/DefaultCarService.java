@@ -77,7 +77,7 @@ public class DefaultCarService implements CarService{
 	public void deSelect(Long carId) throws EntityNotFoundException
 	{
 		CarDO carDO = findCarChecked(carId);
-		//
+		carDO.setIsAvailable(true);
 	}
 
 	@Override

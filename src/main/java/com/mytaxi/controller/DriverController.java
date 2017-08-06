@@ -111,7 +111,7 @@ public class DriverController
     {
     	if(driverService.findDriverOnline(driverId))
     	{
-    		carService.select(carId);
+    		carService.deSelect(carId);
     		//return "forward:/v1/cars/"+carId+"/select";
     	}
     }
