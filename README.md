@@ -60,4 +60,4 @@ Security: secure the API. It's up to you how you are going to implement the secu
 
 ### Solution
  __Note__ : Not fully implemented.
- * I have added the code for the security for the refrence, but in disabled mode. Please check the `com.mytaxi.security.SecurityConfig.java` class.
+ * I have added the code for the security in disabled mode. Please check the `com.mytaxi.security.SecurityConfig.java` class.
