@@ -59,4 +59,5 @@ Make use of the filter pattern to implement an endpoint in the DriverController 
 Security: secure the API. It's up to you how you are going to implement the security.
 
 ### Solution
- * I shall update it soon if I will get time to implement it.
+ __Note__ : Not fully implemented.
+ * I have added the code for the security for the refrence, but in disabled mode. Please check the `com.mytaxi.security.SecurityConfig.java` class.
